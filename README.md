@@ -43,7 +43,60 @@ $ source env/bin/activate
 
 (env)$ pip install django
 (env)$ django-admin startproject hello_async
-
-
 ```
 
+Django будет запускать ваши асинхронные представления, если вы используете встроенный сервер разработки, 
+но на самом деле он не будет запускать их асинхронно, поэтому мы будем запускать Django с Uvicorn.
+
+Установите его:
+
+```bash
+(env)$ pip install uvicorn
+```
+
+Чтобы запустить ваш проект с Uvicorn, вы используете следующую команду из корня вашего проекта:
+
+```bash
+(env)$ uvicorn hello_async.asgi:application
+```
+
+Далее давайте создадим наше первое асинхронное представление. Добавьте новый файл для хранения 
+представлений в папку «hello_async», а затем добавьте следующее представление:
+
+```python
+# hello_async/views.py
+
+from django.http import HttpResponse
+
+
+async def index(request):
+    return HttpResponse("Hello, async Django!")
+```
+Создание асинхронных представлений в Django так же просто, как создание синхронных представлений — 
+все, что вам нужно сделать, это добавить `async` ключевое слово.
+
+Обновите URL-адреса:
+
+```python
+# hello_async/urls.py
+
+from django.contrib import admin
+from django.urls import path
+
+from hello_async.views import index
+
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", index),
+]
+```
+
+Теперь в терминале в корневой папке запустите:
+
+```bash
+(env)$ uvicorn hello_async.asgi:application --reload
+```
+
+[!TIP] Флаг `--reload` сообщает Uvicorn, что нужно следить за изменениями в ваших файлах 
+и перезагружать их, если они будут обнаружены. Это, наверное, было само собой разумеющимся.
