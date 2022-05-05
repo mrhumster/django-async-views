@@ -2,3 +2,4 @@
 env
 *.pyc
 /hello_async/hello_async/secret.py
+/data/

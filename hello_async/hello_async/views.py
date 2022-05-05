@@ -10,6 +10,9 @@ from django.http import HttpResponse
 
 
 # helpers
+from django.shortcuts import render
+
+
 async def http_call_async():
     for num in range(1, 6):
         await asyncio.sleep(1)
@@ -29,7 +32,7 @@ def http_call_sync():
 
 # views
 async def index(request):
-    return HttpResponse("Hello, async Django")
+    return render(request, 'hello_async/index.html')
 
 
 async def async_view(request):

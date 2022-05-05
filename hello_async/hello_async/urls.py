@@ -20,10 +20,10 @@ from hello_async.views import index, sync_view, async_view, smoke_some_meats, bu
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sync/', sync_view),
-    path('async/', async_view),
-    path("smoke_some_meats/", smoke_some_meats),
-    path("burn_some_meats/", burn_some_meats),
-    path("sync_to_async/", async_with_sync_view),
+    path('sync/', sync_view, name='sync'),
+    path('async/', async_view, name='async'),
+    path("smoke_some_meats/", smoke_some_meats, name='smoke_some_meats'),
+    path("burn_some_meats/", burn_some_meats, name='burn_some_meats'),
+    path("sync_to_async/", async_with_sync_view, name='async_with_sync_view'),
     path("", index),
 ]
