@@ -540,3 +540,16 @@ gunicorn -w 3 -k uvicorn.workers.UvicornWorker hello_async.asgi:application
 Чтобы узнать больше о новой асинхронности Django, смотри эту 
 [прекрасную статью](https://wersdoerfer.de/blogs/ephes_blog/django-31-async/), которая охватывает ту же тему, 
 а также многопоточность и тестирование.
+
+## Docker
+
+Добавил в репозиторий docker файл.
+
+Для запуска
+
+```bash
+git clone https://github.com/mrhumster/django-async-views.git
+cd django-async-views
+docker build . -t uvicorn
+docker run --rm -it -d -p 80:80/tcp uvicorn:latest
+```

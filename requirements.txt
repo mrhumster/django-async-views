@@ -1,3 +1,4 @@
 Django~=4.0.4
 httpx~=0.22.0
 asgiref~=3.5.0
+uvicorn~=0.17.6
